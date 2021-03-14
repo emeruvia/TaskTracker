@@ -4,7 +4,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class Task(
+data class Tasks(
   @PrimaryKey(autoGenerate = true)
-  val id: Long
+  val id: Long,
+  val name: String,
+  val tasksList: List<TaskItem>
 )
