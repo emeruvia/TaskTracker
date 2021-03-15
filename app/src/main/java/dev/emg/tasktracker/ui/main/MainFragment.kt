@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +16,8 @@ import dev.emg.tasktracker.databinding.FragmentMainBinding
 import dev.emg.tasktracker.ui.addtask.AddTaskDialogFragment
 import dev.emg.tasktracker.ui.addtask.AddTaskDialogFragment.OnTasksListAdded
 import dev.emg.tasktracker.ui.main.TasksAdapter.OnTasksListListener
+import kotlinx.coroutines.flow.collect
+import timber.log.Timber
 import javax.inject.Inject
 
 class MainFragment : Fragment() {
@@ -68,9 +71,27 @@ class MainFragment : Fragment() {
       )
     }
 
-    viewModel.tasksList.observe(viewLifecycleOwner) {
-      adapter.submitList(it)
+    lifecycleScope.launchWhenStarted {
+      viewModel.tasksList.collect {
+        when (it) {
+          is TasksListUiState.Success -> {
+            adapter.submitList(it.data)
+          }
+          is TasksListUiState.Loading -> {
+            Timber.d("Loading")
+          }
+          is TasksListUiState.Error -> {
+            Timber.e("Error -> ${it.exception}")
+          }
+        }
+      }
     }
+
+  }
+
+  override fun onDestroy() {
+    super.onDestroy()
+    _binding = null
   }
 
   companion object {

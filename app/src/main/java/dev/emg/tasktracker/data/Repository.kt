@@ -17,14 +17,14 @@ class Repository @Inject constructor(private val database: Database) {
     return database.tasksDao().getAllTasks()
   }
 
-  suspend fun insertTasksListInDbAndFetchThem(item: TasksList) = flow<List<TasksList>> {
+  suspend fun insertTasksListInDbAndFetchThem(item: TasksList): List<TasksList> {
     addTasksListItem(item)
-    emit(getAllTasks())
+    return getAllTasks()
   }
 
-  suspend fun deleteTasksListInDbAndFetch(item: TasksList) = flow<List<TasksList>> {
+  suspend fun deleteTasksListInDbAndFetch(item: TasksList): List<TasksList> {
     deleteTasksList(item)
-    emit(getAllTasks())
+    return getAllTasks()
   }
 
   private suspend fun addTasksListItem(item: TasksList) {
