@@ -3,6 +3,7 @@
   <style name="Theme.TaskTracker" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
     <!-- Primary brand color. -->
     <item name="colorPrimary">@color/indigo_500</item>
+    <item name="colorPrimaryDark">@color/indigo_700</item>
     <item name="colorPrimaryVariant">@color/indigo_700</item>
     <item name="colorOnPrimary">@color/black</item>
     <!-- Secondary brand color. -->
@@ -12,5 +13,14 @@
     <!-- Status bar color. -->
     <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
     <!-- Customize your theme here. -->
+    <item name="colorAccent">@color/light_blue_200</item>
+  </style>
+
+  <style name="DialogStyle" parent="Theme.MaterialComponents.BottomSheetDialog">
+    <item name="android:windowIsFloating">false</item>
+    <item name="android:statusBarColor">@android:color/transparent</item>
+    <item name="android:windowSoftInputMode">adjustResize</item>
+    <item name="android:colorAccent">?colorAccent</item>
+    <item name="android:colorBackground">?colorSurface</item>
   </style>
 </resources>

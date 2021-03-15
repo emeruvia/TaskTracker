@@ -13,7 +13,10 @@ import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import androidx.recyclerview.widget.RecyclerView.Orientation
 import dev.emg.tasktracker.App
 import dev.emg.tasktracker.R
+import dev.emg.tasktracker.data.vo.TasksList
 import dev.emg.tasktracker.databinding.FragmentMainBinding
+import dev.emg.tasktracker.ui.addtask.AddTaskDialogFragment
+import dev.emg.tasktracker.ui.addtask.AddTaskDialogFragment.OnTasksListAdded
 import javax.inject.Inject
 
 class MainFragment : Fragment() {
@@ -51,7 +54,14 @@ class MainFragment : Fragment() {
     }
 
     binding.addTaskFab.setOnClickListener {
-      viewModel.addTask()
+      AddTaskDialogFragment.show(
+        requireFragmentManager(),
+        object : OnTasksListAdded {
+          override fun tasksListAdded(item: TasksList) {
+            viewModel.addTask(item)
+          }
+        }
+      )
     }
 
     viewModel.tasksList.observe(viewLifecycleOwner) {

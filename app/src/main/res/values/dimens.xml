@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <dimen name="dp_24">24dp</dimen>
-  <dimen name="dp_16">16dp</dimen>
-  <dimen name="font_16">16sp</dimen>
+  <dimen name="dp_4">4dp</dimen>
   <dimen name="dp_8">8dp</dimen>
+  <dimen name="dp_16">16dp</dimen>
+  <dimen name="dp_24">24dp</dimen>
+
+  <dimen name="fontsize_12">12sp</dimen>
+  <dimen name="fontsize_14">14sp</dimen>
+  <dimen name="fontsize_16">16sp</dimen>
+  <dimen name="fontsize_18">18sp</dimen>
+  <dimen name="fontsize_20">20sp</dimen>
+  <dimen name="fontsize_22">22sp</dimen>
+  <dimen name="fontsize_24">24sp</dimen>
+
 </resources>

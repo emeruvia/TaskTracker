@@ -1,4 +1,8 @@
 <resources>
   <string name="app_name">Task Tracker</string>
   <string name="add_task">Add Task</string>
+  <string name="new_task">New Task</string>
+  <string name="enter_task_name">Enter task list name...</string>
+  <string name="detail">Detail</string>
+  <string name="save">Save</string>
 </resources>

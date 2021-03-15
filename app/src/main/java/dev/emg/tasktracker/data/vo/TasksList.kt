@@ -4,9 +4,12 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "tasks_table")
-data class Tasks(
+data class TasksList(
   @PrimaryKey(autoGenerate = true)
   val id: Long = 0L,
-  val name: String,
-  val tasksList: List<TaskItem> = emptyList()
+  var name: String = "",
+  var detail: String = "",
+  var wasCompleted: Boolean = false,
+  var position: Int = 0,
+  var tasksList: List<TaskItem> = emptyList()
 )
