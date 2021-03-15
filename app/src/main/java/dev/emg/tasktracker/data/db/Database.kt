@@ -5,6 +5,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import dev.emg.tasktracker.data.vo.TaskItem
 import dev.emg.tasktracker.data.vo.Tasks
+import javax.inject.Singleton
 
 @Database(entities = [Tasks::class, TaskItem::class], version = 1, exportSchema = false)
 @TypeConverters(TaskItemTypeConverter::class)

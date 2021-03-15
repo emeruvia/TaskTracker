@@ -3,13 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MainFragment"
+    tools:context=".ui.main.MainFragment"
     >
 
-  <TextView
+  <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/recyclerview"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:text="Temp"
+      tools:listitem="@layout/item_tasks"
       />
 
+  <com.google.android.material.floatingactionbutton.FloatingActionButton
+      android:id="@+id/add_task_fab"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="bottom|end"
+      android:layout_marginBottom="@dimen/dp_16"
+      android:layout_marginEnd="@dimen/dp_16"
+      android:src="@drawable/id_add_24"
+      android:tintMode="?colorOnPrimarySurface"
+      android:contentDescription="@string/add_task"
+      />
 </FrameLayout>

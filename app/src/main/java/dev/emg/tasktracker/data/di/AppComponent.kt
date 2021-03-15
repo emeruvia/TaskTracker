@@ -4,6 +4,7 @@ import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
 import dev.emg.tasktracker.ui.MainActivity
+import dev.emg.tasktracker.ui.main.MainFragment
 import javax.inject.Singleton
 
 @Singleton
@@ -16,5 +17,6 @@ interface AppComponent {
   }
 
   fun inject(activity: MainActivity)
+  fun inject(fragment: MainFragment)
 
 }

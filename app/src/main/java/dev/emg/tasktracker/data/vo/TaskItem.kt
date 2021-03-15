@@ -3,10 +3,10 @@ package dev.emg.tasktracker.data.vo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "task_item_table")
 data class TaskItem(
   @PrimaryKey(autoGenerate = true)
-  val id: Long,
+  val id: Long = 0L,
   var name: String,
   var isCompleted: Boolean,
   val order: Int
