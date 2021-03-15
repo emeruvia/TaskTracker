@@ -1,22 +1,20 @@
 package dev.emg.tasktracker.ui.main
 
-import android.app.Application
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
-import androidx.recyclerview.widget.RecyclerView.Orientation
 import dev.emg.tasktracker.App
-import dev.emg.tasktracker.R
 import dev.emg.tasktracker.data.vo.TasksList
 import dev.emg.tasktracker.databinding.FragmentMainBinding
 import dev.emg.tasktracker.ui.addtask.AddTaskDialogFragment
 import dev.emg.tasktracker.ui.addtask.AddTaskDialogFragment.OnTasksListAdded
+import dev.emg.tasktracker.ui.main.TasksAdapter.OnTasksListListener
 import javax.inject.Inject
 
 class MainFragment : Fragment() {
@@ -43,14 +41,20 @@ class MainFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    val adapter = TasksAdapter()
+    val adapter = TasksAdapter(object : OnTasksListListener {
+      override fun onTasksListDeleted(item: TasksList) {
+        viewModel.deleteTasksList(item)
+      }
+    })
     val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
     val itemDecorator = DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL)
+    val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback(adapter, requireContext()))
 
     binding.recyclerview.apply {
       this.adapter = adapter
       this.layoutManager = layoutManager
       this.addItemDecoration(itemDecorator)
+      itemTouchHelper.attachToRecyclerView(this)
     }
 
     binding.addTaskFab.setOnClickListener {

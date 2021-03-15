@@ -5,7 +5,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import dev.emg.tasktracker.data.vo.TasksList
 
-class TasksAdapter : ListAdapter<TasksList, TasksViewHolder>(DIFF_UTIL) {
+class TasksAdapter(
+  private val listener: OnTasksListListener
+) : ListAdapter<TasksList, TasksViewHolder>(DIFF_UTIL) {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TasksViewHolder {
     return TasksViewHolder.from(parent)
@@ -13,6 +15,15 @@ class TasksAdapter : ListAdapter<TasksList, TasksViewHolder>(DIFF_UTIL) {
 
   override fun onBindViewHolder(holder: TasksViewHolder, position: Int) {
     holder.bind(getItem(position))
+  }
+
+  fun deleteItemAtPosition(position: Int) {
+    val tasksListItem = getItem(position)
+    listener.onTasksListDeleted(tasksListItem)
+  }
+
+  interface OnTasksListListener {
+    fun onTasksListDeleted(item: TasksList)
   }
 
   companion object {

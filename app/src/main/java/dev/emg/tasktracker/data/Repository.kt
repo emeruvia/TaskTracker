@@ -9,18 +9,29 @@ import javax.inject.Singleton
 @Singleton
 class Repository @Inject constructor(private val database: Database) {
 
-  suspend fun addTasksListItem(item: TasksList) {
-    database.tasksDao().insert(item)
+  suspend fun updateTasksList(item: TasksList) {
+    database.tasksDao().update(item)
   }
 
   suspend fun getAllTasks(): List<TasksList> {
     return database.tasksDao().getAllTasks()
   }
 
-  suspend fun insertTaskInDbAndFetch(item: TasksList) = flow<List<TasksList>> {
+  suspend fun insertTasksListInDbAndFetchThem(item: TasksList) = flow<List<TasksList>> {
     addTasksListItem(item)
-    val result = getAllTasks()
-    emit(result)
+    emit(getAllTasks())
   }
 
+  suspend fun deleteTasksListInDbAndFetch(item: TasksList) = flow<List<TasksList>> {
+    deleteTasksList(item)
+    emit(getAllTasks())
+  }
+
+  private suspend fun addTasksListItem(item: TasksList) {
+    database.tasksDao().insert(item)
+  }
+
+  private suspend fun deleteTasksList(item: TasksList) {
+    database.tasksDao().delete(item)
+  }
 }

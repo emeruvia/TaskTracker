@@ -33,12 +33,25 @@ class TasksViewModel @Inject constructor(private val repository: Repository) : V
   fun addTask(item: TasksList) {
     viewModelScope.launch(Dispatchers.IO) {
       try {
-        val result = repository.insertTaskInDbAndFetch(item)
+        val result = repository.insertTasksListInDbAndFetchThem(item)
         result.collect {
           _tasksList.postValue(it)
         }
       } catch (e: Exception) {
         Timber.e(e, "addTask() -> ${e.message}")
+      }
+    }
+  }
+
+  fun deleteTasksList(item: TasksList) {
+    viewModelScope.launch {
+      try {
+        val result = repository.deleteTasksListInDbAndFetch(item)
+        result.collect {
+          _tasksList.postValue(it)
+        }
+      } catch (e: Exception) {
+        Timber.e(e, "deleteList() -> ${e.message}")
       }
     }
   }
