@@ -1,0 +1,10 @@
+package dev.emg.tasktracker
+
+import dev.emg.tasktracker.data.di.AppComponent
+import dev.emg.tasktracker.di.DaggerTestAppComponent
+
+class TestApp: App() {
+  override fun initializeAppComponent(): AppComponent {
+    return DaggerTestAppComponent.create()
+  }
+}

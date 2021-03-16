@@ -71,7 +71,8 @@ class MainFragment : Fragment() {
       )
     }
 
-    lifecycleScope.launchWhenStarted {
+
+    viewLifecycleOwner.lifecycleScope.launchWhenStarted {
       viewModel.tasksList.collect {
         when (it) {
           is TasksListUiState.Success -> {

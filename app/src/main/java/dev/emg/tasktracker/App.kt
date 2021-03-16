@@ -1,14 +1,15 @@
 package dev.emg.tasktracker
 
 import android.app.Application
+import dev.emg.tasktracker.data.di.AppComponent
 import dev.emg.tasktracker.data.di.DaggerAppComponent
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 
-class App : Application() {
+open class App : Application() {
 
   val appComponent by lazy {
-    DaggerAppComponent.factory().create(applicationContext)
+    initializeAppComponent()
   }
 
   override fun onCreate() {
@@ -16,6 +17,10 @@ class App : Application() {
     if (BuildConfig.DEBUG) {
       Timber.plant(DebugTree())
     }
+  }
+
+  open fun initializeAppComponent(): AppComponent {
+    return DaggerAppComponent.factory().create(applicationContext)
   }
 
 }

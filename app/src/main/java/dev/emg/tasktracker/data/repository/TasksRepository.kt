@@ -1,4 +1,4 @@
-package dev.emg.tasktracker.data
+package dev.emg.tasktracker.data.repository
 
 import dev.emg.tasktracker.data.db.Database
 import dev.emg.tasktracker.data.vo.TasksList
@@ -7,22 +7,22 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class Repository @Inject constructor(private val database: Database) {
+class TasksRepository @Inject constructor(private val database: Database) : Repository {
 
-  suspend fun updateTasksList(item: TasksList) {
+  override suspend fun updateTasksList(item: TasksList) {
     database.tasksDao().update(item)
   }
 
-  suspend fun getAllTasks(): List<TasksList> {
+  override suspend fun getAllTasks(): List<TasksList> {
     return database.tasksDao().getAllTasks()
   }
 
-  suspend fun insertTasksListInDbAndFetchThem(item: TasksList): List<TasksList> {
+  override suspend fun insertTasksListInDbAndFetchThem(item: TasksList): List<TasksList> {
     addTasksListItem(item)
     return getAllTasks()
   }
 
-  suspend fun deleteTasksListInDbAndFetch(item: TasksList): List<TasksList> {
+  override suspend fun deleteTasksListInDbAndFetch(item: TasksList): List<TasksList> {
     deleteTasksList(item)
     return getAllTasks()
   }

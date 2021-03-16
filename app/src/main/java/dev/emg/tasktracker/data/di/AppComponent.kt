@@ -8,7 +8,7 @@ import dev.emg.tasktracker.ui.main.MainFragment
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [StorageModule::class])
+@Component(modules = [StorageModule::class, RepositoryModule::class])
 interface AppComponent {
 
   @Component.Factory

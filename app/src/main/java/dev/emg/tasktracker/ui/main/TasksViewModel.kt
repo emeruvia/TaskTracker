@@ -1,15 +1,12 @@
 package dev.emg.tasktracker.ui.main
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.emg.tasktracker.data.Repository
+import dev.emg.tasktracker.data.repository.Repository
 import dev.emg.tasktracker.data.vo.TasksList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.lang.Exception
