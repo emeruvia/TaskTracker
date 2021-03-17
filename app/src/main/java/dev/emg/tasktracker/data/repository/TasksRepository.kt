@@ -26,6 +26,11 @@ class TasksRepository @Inject constructor(private val database: Database) : Repo
     return getAllTasks()
   }
 
+  override suspend fun updateTasksListItemInDbAndFetch(item: TasksList): List<TasksList> {
+    updateTasksList(item)
+    return getAllTasks()
+  }
+
   private suspend fun addTasksListItem(item: TasksList) {
     database.tasksListDao().insert(item)
   }

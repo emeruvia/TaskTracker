@@ -20,10 +20,11 @@ import kotlinx.coroutines.flow.collect
 import timber.log.Timber
 import javax.inject.Inject
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment(), OnTasksListListener {
 
   private var _binding: FragmentMainBinding? = null
   private val binding: FragmentMainBinding get() = _binding!!
+  private lateinit var taskAdapter: TasksAdapter
 
   @Inject lateinit var viewModel: TasksViewModel
 
@@ -44,17 +45,13 @@ class MainFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    val adapter = TasksAdapter(object : OnTasksListListener {
-      override fun onTasksListDeleted(item: TasksList) {
-        viewModel.deleteTasksList(item)
-      }
-    })
+    taskAdapter = TasksAdapter(this)
     val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
     val itemDecorator = DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL)
-    val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback(adapter, requireContext()))
+    val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback(taskAdapter, requireContext()))
 
     binding.recyclerview.apply {
-      this.adapter = adapter
+      this.adapter = taskAdapter
       this.layoutManager = layoutManager
       this.addItemDecoration(itemDecorator)
       itemTouchHelper.attachToRecyclerView(this)
@@ -76,7 +73,7 @@ class MainFragment : Fragment() {
       viewModel.tasksList.collect {
         when (it) {
           is TasksListUiState.Success -> {
-            adapter.submitList(it.data)
+            taskAdapter.submitList(it.data)
           }
           is TasksListUiState.Loading -> {
             Timber.d("Loading")
@@ -93,6 +90,15 @@ class MainFragment : Fragment() {
   override fun onDestroy() {
     super.onDestroy()
     _binding = null
+  }
+
+  override fun onTasksListWasCompleted(item: TasksList) {
+    viewModel.updateTasksList(item)
+    taskAdapter.notifyDataSetChanged()
+  }
+
+  override fun onTasksListDeleted(item: TasksList) {
+    viewModel.deleteTasksList(item)
   }
 
   companion object {

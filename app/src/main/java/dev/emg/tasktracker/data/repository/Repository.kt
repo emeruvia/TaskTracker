@@ -17,4 +17,6 @@ interface Repository {
 
   suspend fun deleteTasksListInDbAndFetch(item: TasksList): List<TasksList>
 
+  suspend fun updateTasksListItemInDbAndFetch(item: TasksList): List<TasksList>
+
 }

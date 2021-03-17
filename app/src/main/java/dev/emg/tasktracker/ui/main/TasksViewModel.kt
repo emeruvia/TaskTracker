@@ -44,8 +44,20 @@ class TasksViewModel @Inject constructor(private val repository: Repository) : V
     }
   }
 
+  fun updateTasksList(item: TasksList) {
+    viewModelScope.launch(Dispatchers.IO) {
+      _tasksList.value = TasksListUiState.Loading
+      try {
+        _tasksList.value = TasksListUiState.Success(repository.updateTasksListItemInDbAndFetch(item))
+      } catch (e: Exception) {
+        _tasksList.value = TasksListUiState.Error(e)
+        Timber.e(e, "deleteList() -> ${e.message}")
+      }
+    }
+  }
+
   fun deleteTasksList(item: TasksList) {
-    viewModelScope.launch {
+    viewModelScope.launch(Dispatchers.IO) {
       _tasksList.value = TasksListUiState.Loading
       try {
         _tasksList.value = TasksListUiState.Success(repository.deleteTasksListInDbAndFetch(item))

@@ -14,7 +14,12 @@ class TasksAdapter(
   }
 
   override fun onBindViewHolder(holder: TasksViewHolder, position: Int) {
-    holder.bind(getItem(position))
+    holder.bind(getItem(position), listener)
+  }
+
+  override fun onViewRecycled(holder: TasksViewHolder) {
+    super.onViewRecycled(holder)
+    holder.unbind()
   }
 
   fun deleteItemAtPosition(position: Int) {
@@ -23,6 +28,7 @@ class TasksAdapter(
   }
 
   interface OnTasksListListener {
+    fun onTasksListWasCompleted(item: TasksList)
     fun onTasksListDeleted(item: TasksList)
   }
 
