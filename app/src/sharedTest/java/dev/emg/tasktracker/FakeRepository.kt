@@ -6,7 +6,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class FakeRepository @Inject constructor(): Repository {
+class FakeRepository @Inject constructor() : Repository {
   override suspend fun updateTasksList(item: TasksList) {
     TODO("Not yet implemented")
   }

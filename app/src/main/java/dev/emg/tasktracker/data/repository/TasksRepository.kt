@@ -2,7 +2,6 @@ package dev.emg.tasktracker.data.repository
 
 import dev.emg.tasktracker.data.db.Database
 import dev.emg.tasktracker.data.vo.TasksList
-import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -10,11 +9,11 @@ import javax.inject.Singleton
 class TasksRepository @Inject constructor(private val database: Database) : Repository {
 
   override suspend fun updateTasksList(item: TasksList) {
-    database.tasksDao().update(item)
+    database.tasksListDao().update(item)
   }
 
   override suspend fun getAllTasks(): List<TasksList> {
-    return database.tasksDao().getAllTasks()
+    return database.tasksListDao().getAllTasks()
   }
 
   override suspend fun insertTasksListInDbAndFetchThem(item: TasksList): List<TasksList> {
@@ -28,10 +27,10 @@ class TasksRepository @Inject constructor(private val database: Database) : Repo
   }
 
   private suspend fun addTasksListItem(item: TasksList) {
-    database.tasksDao().insert(item)
+    database.tasksListDao().insert(item)
   }
 
   private suspend fun deleteTasksList(item: TasksList) {
-    database.tasksDao().delete(item)
+    database.tasksListDao().delete(item)
   }
 }

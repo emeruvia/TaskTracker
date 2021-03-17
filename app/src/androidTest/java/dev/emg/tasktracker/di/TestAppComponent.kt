@@ -5,5 +5,5 @@ import dev.emg.tasktracker.data.di.AppComponent
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [TestRepositoryModule::class])
+@Component(modules = [TestRepositoryModule::class, TestStorageModule::class])
 interface TestAppComponent : AppComponent
