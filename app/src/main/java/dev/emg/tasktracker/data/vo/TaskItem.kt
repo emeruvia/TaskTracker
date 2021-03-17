@@ -1,8 +1,11 @@
 package dev.emg.tasktracker.data.vo
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Entity(tableName = "task_item_table")
 data class TaskItem(
   @PrimaryKey(autoGenerate = true)
@@ -10,4 +13,4 @@ data class TaskItem(
   var name: String,
   var wasCompleted: Boolean,
   val position: Int
-)
+) : Parcelable

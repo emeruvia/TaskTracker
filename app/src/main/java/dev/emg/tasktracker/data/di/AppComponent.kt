@@ -4,6 +4,7 @@ import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
 import dev.emg.tasktracker.ui.MainActivity
+import dev.emg.tasktracker.ui.detailedtasklist.DetailedTasksListFragment
 import dev.emg.tasktracker.ui.main.MainFragment
 import javax.inject.Singleton
 
@@ -16,7 +17,7 @@ interface AppComponent {
     fun create(@BindsInstance context: Context): AppComponent
   }
 
-  fun inject(activity: MainActivity)
   fun inject(fragment: MainFragment)
+  fun inject(fragment: DetailedTasksListFragment)
 
 }

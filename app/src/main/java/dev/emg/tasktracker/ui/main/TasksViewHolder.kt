@@ -21,6 +21,10 @@ class TasksViewHolder(private val binding: ItemTasksBinding) : ViewHolder(bindin
       binding.detailsTv.goneView()
     }
 
+    binding.root.setOnClickListener {
+      listener.onTasksListWasClicked(tasksList)
+    }
+
 //    when (tasksList.wasCompleted) {
 //      true -> {
 //        binding.taskCheck.isChecked = true

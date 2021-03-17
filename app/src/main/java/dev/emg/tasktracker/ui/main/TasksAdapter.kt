@@ -28,6 +28,7 @@ class TasksAdapter(
   }
 
   interface OnTasksListListener {
+    fun onTasksListWasClicked(item: TasksList)
     fun onTasksListWasCompleted(item: TasksList)
     fun onTasksListDeleted(item: TasksList)
   }

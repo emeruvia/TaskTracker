@@ -15,6 +15,7 @@ import dev.emg.tasktracker.data.vo.TasksList
 import dev.emg.tasktracker.databinding.FragmentMainBinding
 import dev.emg.tasktracker.ui.addtask.AddTaskDialogFragment
 import dev.emg.tasktracker.ui.addtask.AddTaskDialogFragment.OnTasksListAdded
+import dev.emg.tasktracker.ui.detailedtasklist.DetailedTasksListFragment
 import dev.emg.tasktracker.ui.main.TasksAdapter.OnTasksListListener
 import kotlinx.coroutines.flow.collect
 import timber.log.Timber
@@ -90,6 +91,17 @@ class MainFragment : Fragment(), OnTasksListListener {
   override fun onDestroy() {
     super.onDestroy()
     _binding = null
+  }
+
+  override fun onTasksListWasClicked(item: TasksList) {
+    val transaction = requireActivity().supportFragmentManager.beginTransaction()
+    transaction.addToBackStack(TAG)
+    transaction.replace(
+      binding.root.id,
+      DetailedTasksListFragment.create(item),
+      DetailedTasksListFragment.TAG
+    )
+    transaction.commit()
   }
 
   override fun onTasksListWasCompleted(item: TasksList) {
