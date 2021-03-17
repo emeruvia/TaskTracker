@@ -94,7 +94,9 @@ class MainFragment : Fragment(), OnTasksListListener {
 
   override fun onTasksListWasCompleted(item: TasksList) {
     viewModel.updateTasksList(item)
-    taskAdapter.notifyDataSetChanged()
+    binding.recyclerview.post {
+      taskAdapter.notifyDataSetChanged()
+    }
   }
 
   override fun onTasksListDeleted(item: TasksList) {

@@ -20,30 +20,20 @@ class TasksViewHolder(private val binding: ItemTasksBinding) : ViewHolder(bindin
     } else {
       binding.detailsTv.goneView()
     }
-    when (tasksList.wasCompleted) {
-      true -> {
-        binding.taskCheck.isChecked = true
-      }
-      false -> {
-        binding.taskCheck.isChecked = false
-      }
-    }
 
-    binding.taskCheck.apply {
-      this.setOnClickListener {
-        when (this.isChecked) {
-          true -> {
-            binding.nameTv.paintFlags = binding.nameTv.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-          }
-          false -> {
-            binding.taskCheck.paintFlags =
-              binding.taskCheck.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
-          }
-        }
-        tasksList.wasCompleted = this.isChecked
-        listener.onTasksListWasCompleted(tasksList)
-      }
-    }
+//    when (tasksList.wasCompleted) {
+//      true -> {
+//        binding.taskCheck.isChecked = true
+//      }
+//      false -> {
+//        binding.taskCheck.isChecked = false
+//      }
+//    }
+//
+//    binding.taskCheck.setOnCheckedChangeListener { compoundButton, isChecked ->
+//      tasksList.wasCompleted = isChecked
+//      listener.onTasksListWasCompleted(tasksList)
+//    }
   }
 
   fun unbind() {

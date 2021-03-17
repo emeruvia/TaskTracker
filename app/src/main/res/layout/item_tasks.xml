@@ -14,6 +14,7 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
+      android:visibility="gone"
       />
 
   <TextView
@@ -24,6 +25,7 @@
       android:layout_marginStart="@dimen/dp_4"
       android:gravity="start"
       android:paddingTop="@dimen/dp_8"
+      android:paddingBottom="@dimen/dp_8"
       android:textAlignment="viewStart"
       android:textSize="@dimen/fontsize_20"
       app:layout_constraintBottom_toTopOf="@id/details_tv"
@@ -40,7 +42,6 @@
       android:layout_height="wrap_content"
       android:layout_marginStart="@dimen/dp_4"
       android:gravity="start"
-      android:paddingTop="@dimen/dp_4"
       android:paddingBottom="@dimen/dp_8"
       android:textAlignment="viewStart"
       android:textSize="@dimen/fontsize_14"
