@@ -1,6 +1,6 @@
 # Task Tracker
 ## Description
-Find your favorite movies from TheMoviesDB API
+Track your tasks with task tracker. You can create a list of tasks, add tasks to that list, remove a task or remove the whole list if you want too.
 
 ## Tech Stack
 - Architecture Components: ViewModel
