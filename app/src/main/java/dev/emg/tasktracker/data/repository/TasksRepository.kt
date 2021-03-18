@@ -46,6 +46,16 @@ class TasksRepository @Inject constructor(private val database: Database) : Repo
     return getTasksListById(id)
   }
 
+  override suspend fun deleteTaskItemFromTaskListById(id: Long, item: TaskItem): TasksList {
+    val tasksList = getTasksListById(id)
+    val updatedTasks = mutableListOf<TaskItem>()
+    updatedTasks.addAll(tasksList.tasksList)
+    updatedTasks.remove(item)
+    tasksList.tasksList = updatedTasks
+    updateTasksList(tasksList)
+    return getTasksListById(id)
+  }
+
   private suspend fun addTasksListItem(item: TasksList) {
     database.tasksListDao().insert(item)
   }

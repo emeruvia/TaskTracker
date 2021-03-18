@@ -58,6 +58,10 @@ class TasksAdapter(
     }
   }
 
+  fun deleteItemAtPosition(position: Int) {
+    listener.onDeleteTask(getItem(position))
+  }
+
   interface OnTaskListener {
     fun onAddTask(item: TaskItem)
     fun onDeleteTask(item: TaskItem)
@@ -65,8 +69,8 @@ class TasksAdapter(
   }
 
   companion object {
-    private val VIEW_TASK = 0
-    private val VIEW_ADD_TASK = 1
+    private const val VIEW_TASK = 0
+    private const val VIEW_ADD_TASK = 1
 
     private val DIFF_UTIL = object : DiffUtil.ItemCallback<TaskItem>() {
       override fun areContentsTheSame(oldItem: TaskItem, newItem: TaskItem): Boolean {

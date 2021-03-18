@@ -8,17 +8,6 @@
     android:paddingStart="@dimen/dp_16"
     >
 
-  <CheckBox
-      android:id="@+id/task_check"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="@dimen/dp_16"
-      android:visibility="gone"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      />
-
   <TextView
       android:id="@+id/name_tv"
       android:layout_width="@dimen/dp_0"
@@ -52,6 +41,17 @@
       app:layout_constraintStart_toEndOf="@id/task_check"
       app:layout_constraintTop_toBottomOf="@id/name_tv"
       tools:text="Task Detail"
+      />
+
+  <com.google.android.material.checkbox.MaterialCheckBox
+      android:id="@+id/task_check"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:button="@drawable/checkbox_selector"
+      android:visibility="gone"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
       />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

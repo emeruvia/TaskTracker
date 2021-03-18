@@ -8,18 +8,29 @@
 
   <TextView
       android:id="@+id/task_name"
-      android:layout_width="match_parent"
+      android:layout_width="@dimen/dp_0"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="@dimen/dp_4"
+      android:paddingBottom="@dimen/dp_8"
       android:layout_marginEnd="@dimen/dp_16"
-      android:layout_marginStart="@dimen/dp_16"
-      android:layout_marginTop="@dimen/dp_4"
+      android:paddingTop="@dimen/dp_8"
       android:textSize="@dimen/fontsize_16"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintStart_toEndOf="@id/checkbox"
       app:layout_constraintTop_toTopOf="parent"
       tools:text="Name of task goes here"
+      />
+
+  <com.google.android.material.checkbox.MaterialCheckBox
+      android:id="@+id/checkbox"
+      android:layout_width="@dimen/dp_24"
+      android:layout_height="wrap_content"
+      android:button="@drawable/checkbox_selector"
+      android:visibility="gone"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toStartOf="@id/task_name"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
       />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

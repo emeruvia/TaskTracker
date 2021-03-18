@@ -7,11 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.ItemTouchHelper
 import dev.emg.tasktracker.App
 import dev.emg.tasktracker.data.vo.ItemUiState
 import dev.emg.tasktracker.data.vo.TaskItem
 import dev.emg.tasktracker.data.vo.TasksList
 import dev.emg.tasktracker.databinding.FragmentDetailedTasksListBinding
+import dev.emg.tasktracker.ui.SwipeToDeleteCallback
 import dev.emg.tasktracker.ui.detailedtasklist.TasksAdapter.OnTaskListener
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
@@ -52,7 +54,15 @@ class DetailedTasksListFragment : Fragment(), OnTaskListener {
     taskAdapter = TasksAdapter(this)
 
     binding.recyclerview.apply {
+      val itemTouchHelper = ItemTouchHelper(
+        SwipeToDeleteCallback(
+          context = requireContext(),
+          taskAdapter = taskAdapter
+        )
+      )
+
       this.adapter = taskAdapter
+      itemTouchHelper.attachToRecyclerView(this)
     }
 
     viewLifecycleOwner.lifecycleScope.launchWhenStarted {
@@ -69,10 +79,10 @@ class DetailedTasksListFragment : Fragment(), OnTaskListener {
 
           }
           is ItemUiState.Loading -> {
-
+            // TODO Add loading state
           }
           is ItemUiState.Error -> {
-
+            // TODO Add error state
           }
         }
       }
@@ -84,7 +94,7 @@ class DetailedTasksListFragment : Fragment(), OnTaskListener {
   }
 
   override fun onDeleteTask(item: TaskItem) {
-
+    viewModel.deleteTaskItemFromTaskListById(tasksListId, item)
   }
 
   override fun onUpdateTask(item: TaskItem) {

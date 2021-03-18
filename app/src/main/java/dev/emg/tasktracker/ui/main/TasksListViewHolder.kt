@@ -20,7 +20,7 @@ class TasksListViewHolder(private val binding: ItemTasksListBinding) : ViewHolde
       binding.detailsTv.goneView()
     }
 
-    binding.root.setOnClickListener {
+    binding.nameTv.setOnClickListener {
       listener.onTasksListWasClicked(tasksList)
     }
 
@@ -33,9 +33,12 @@ class TasksListViewHolder(private val binding: ItemTasksListBinding) : ViewHolde
 //      }
 //    }
 //
-//    binding.taskCheck.setOnCheckedChangeListener { compoundButton, isChecked ->
-//      tasksList.wasCompleted = isChecked
-//      listener.onTasksListWasCompleted(tasksList)
+//    binding.taskCheck.apply {
+//      this.setOnClickListener {
+//        this.isChecked = this.isChecked
+//        tasksList.wasCompleted = this.isChecked
+//        listener.onTasksListWasCompleted(tasksList)
+//      }
 //    }
   }
 

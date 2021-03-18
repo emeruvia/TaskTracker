@@ -14,6 +14,7 @@ import dev.emg.tasktracker.App
 import dev.emg.tasktracker.data.vo.ItemUiState
 import dev.emg.tasktracker.data.vo.TasksList
 import dev.emg.tasktracker.databinding.FragmentMainBinding
+import dev.emg.tasktracker.ui.SwipeToDeleteCallback
 import dev.emg.tasktracker.ui.TasksListViewModel
 import dev.emg.tasktracker.ui.addtask.AddTaskDialogFragment
 import dev.emg.tasktracker.ui.addtask.AddTaskDialogFragment.OnTasksListAdded
@@ -51,7 +52,12 @@ class MainFragment : Fragment(), OnTasksListListener {
     tasksListAdapter = TasksListAdapter(this)
     val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
     val itemDecorator = DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL)
-    val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback(tasksListAdapter, requireContext()))
+    val itemTouchHelper = ItemTouchHelper(
+      SwipeToDeleteCallback(
+        context = requireContext(),
+        tasksListAdapter = tasksListAdapter
+      )
+    )
 
     binding.recyclerview.apply {
       this.adapter = tasksListAdapter

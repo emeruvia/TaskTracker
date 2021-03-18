@@ -1,4 +1,4 @@
-package dev.emg.tasktracker.ui.main
+package dev.emg.tasktracker.ui
 
 import android.content.Context
 import android.graphics.Canvas
@@ -9,17 +9,19 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import dev.emg.tasktracker.R
+import dev.emg.tasktracker.ui.detailedtasklist.TasksAdapter
+import dev.emg.tasktracker.ui.main.TasksListAdapter
 
 class SwipeToDeleteCallback(
-  private val adapter: TasksListAdapter,
-  context: Context
-) : ItemTouchHelper.SimpleCallback(ItemTouchHelper.LEFT, ItemTouchHelper.RIGHT) {
+  context: Context,
+  private val tasksListAdapter: TasksListAdapter? = null,
+  private val taskAdapter: TasksAdapter? = null
+) : ItemTouchHelper.SimpleCallback(ItemTouchHelper.LEFT, ItemTouchHelper.LEFT) {
 
   private val accentColor = context.getColorStateList(R.color.color_state_list).defaultColor
   private val colorDrawable = ColorDrawable(accentColor)
   private val drawable: Drawable =
     ContextCompat.getDrawable(context, R.drawable.ic_delete_sweep_24)!!
-
 
   override fun onMove(
     recyclerView: RecyclerView,
@@ -31,7 +33,8 @@ class SwipeToDeleteCallback(
 
   override fun onSwiped(viewHolder: ViewHolder, direction: Int) {
     val position = viewHolder.adapterPosition
-    adapter.deleteItemAtPosition(position)
+    tasksListAdapter?.deleteItemAtPosition(position)
+    taskAdapter?.deleteItemAtPosition(position)
   }
 
   override fun onChildDraw(

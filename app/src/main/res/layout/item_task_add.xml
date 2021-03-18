@@ -9,11 +9,10 @@
   <EditText
       android:id="@+id/task_name"
       android:layout_width="0dp"
-      app:layout_constraintWidth_percent="0.8"
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/dp_4"
       android:layout_marginEnd="@dimen/dp_16"
-      android:layout_marginStart="@dimen/dp_16"
+      android:layout_marginStart="@dimen/dp_8"
       android:layout_marginTop="@dimen/dp_4"
       android:autofillHints="@string/new_task"
       android:background="@null"
