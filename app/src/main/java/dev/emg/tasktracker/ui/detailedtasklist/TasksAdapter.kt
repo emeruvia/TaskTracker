@@ -26,19 +26,38 @@ class TasksAdapter(
     }
   }
 
+  override fun onViewRecycled(holder: ViewHolder) {
+    super.onViewRecycled(holder)
+    when (holder) {
+      is TaskViewHolder -> holder.unbind()
+      is AddTaskViewHolder -> holder.unbind()
+    }
+  }
+
+  override fun getItem(position: Int): TaskItem {
+    return super.getItem(calculatePosition(position))
+  }
+
   override fun getItemCount(): Int {
-    return when (super.getItemCount()) {
+    return when (val count = super.getItemCount()) {
       0 -> 1
-      else -> super.getItemCount() + 1
+      else -> count + 1
     }
   }
 
   override fun getItemViewType(position: Int): Int {
-    return when (itemCount) {
-      1 -> VIEW_ADD_TASK
-      itemCount -> VIEW_ADD_TASK
+    val lastItemInList = currentList.size + 1
+    return when (position) {
+      0 -> VIEW_ADD_TASK
+      lastItemInList -> VIEW_ADD_TASK
       else -> VIEW_TASK
     }
+  }
+
+  private fun calculatePosition(position: Int): Int {
+    return if (position != 0) {
+      position - 1
+    } else 0
   }
 
   interface OnTaskListener {

@@ -9,7 +9,11 @@ import dev.emg.tasktracker.databinding.ItemTaskBinding
 class TaskViewHolder(private val binding: ItemTaskBinding) : ViewHolder(binding.root) {
 
   fun bind(task: TaskItem) {
-    binding.taskName.setText(task.name)
+    binding.taskName.text = task.name
+  }
+
+  fun unbind() {
+    binding.taskName.text = ""
   }
 
   companion object {

@@ -29,6 +29,10 @@ class AddTaskViewHolder(private val binding: ItemTaskAddBinding) : ViewHolder(bi
           val newTask = TaskItem(name = binding.taskName.text.toString())
           listener.onAddTask(newTask)
 
+          binding.taskName.apply {
+            this.text.clear()
+          }
+
           return@setOnEditorActionListener true
         }
       }
@@ -36,10 +40,14 @@ class AddTaskViewHolder(private val binding: ItemTaskAddBinding) : ViewHolder(bi
     }
   }
 
+  fun unbind() {
+    binding.taskName.text.clear()
+  }
+
   companion object {
     fun from(parent: ViewGroup): AddTaskViewHolder {
       val layoutInflater = LayoutInflater.from(parent.context)
-      val binding = ItemTaskAddBinding.inflate(layoutInflater)
+      val binding = ItemTaskAddBinding.inflate(layoutInflater, parent, false)
       return AddTaskViewHolder(binding)
     }
   }

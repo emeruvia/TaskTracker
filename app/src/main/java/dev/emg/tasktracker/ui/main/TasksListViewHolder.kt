@@ -46,7 +46,7 @@ class TasksListViewHolder(private val binding: ItemTasksListBinding) : ViewHolde
   companion object {
     fun from(parent: ViewGroup): TasksListViewHolder {
       val layoutInflater = LayoutInflater.from(parent.context)
-      val binding = ItemTasksListBinding.inflate(layoutInflater)
+      val binding = ItemTasksListBinding.inflate(layoutInflater, parent, false)
       return TasksListViewHolder(binding)
     }
   }

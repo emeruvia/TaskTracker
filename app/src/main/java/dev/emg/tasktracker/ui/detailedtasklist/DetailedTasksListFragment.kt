@@ -61,6 +61,12 @@ class DetailedTasksListFragment : Fragment(), OnTaskListener {
           is ItemUiState.Success -> {
             binding.taskTitle.text = it.data.name
             taskAdapter.submitList(it.data.tasksList)
+            binding.recyclerview.post {
+              if (!binding.recyclerview.isComputingLayout) {
+                taskAdapter.notifyDataSetChanged()
+              }
+            }
+
           }
           is ItemUiState.Loading -> {
 
