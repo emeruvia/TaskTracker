@@ -6,6 +6,7 @@ import dev.emg.tasktracker.data.repository.Repository
 import dev.emg.tasktracker.data.vo.ItemUiState
 import dev.emg.tasktracker.data.vo.TasksList
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -24,6 +25,7 @@ class TasksListViewModel @Inject constructor(private val repository: Repository)
     viewModelScope.launch(Dispatchers.IO) {
       _tasksList.value = ItemUiState.Loading
       try {
+        delay(3000) // Manual delay to show loading animation
         _tasksList.value = ItemUiState.Success(repository.getAllTasks())
       } catch (e: Exception) {
         _tasksList.value = ItemUiState.Error(e)
@@ -36,6 +38,7 @@ class TasksListViewModel @Inject constructor(private val repository: Repository)
     viewModelScope.launch(Dispatchers.IO) {
       _tasksList.value = ItemUiState.Loading
       try {
+        throw Exception("error")
         _tasksList.value =
           ItemUiState.Success(repository.insertTasksListInDbAndFetchThem(item))
       } catch (e: Exception) {

@@ -15,6 +15,14 @@
       tools:listitem="@layout/item_tasks_list"
       />
 
+  <com.airbnb.lottie.LottieAnimationView
+      android:id="@+id/lottie_animation"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:visibility="gone"
+      tools:visibility="visible"
+      />
+
   <com.google.android.material.floatingactionbutton.FloatingActionButton
       android:id="@+id/add_task_fab"
       android:layout_width="wrap_content"

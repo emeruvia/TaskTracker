@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.airbnb.lottie.LottieDrawable
 import com.google.android.material.snackbar.Snackbar
 import dev.emg.tasktracker.App
 import dev.emg.tasktracker.R
@@ -21,7 +22,9 @@ import dev.emg.tasktracker.ui.TasksListViewModel
 import dev.emg.tasktracker.ui.addtask.AddTaskDialogFragment
 import dev.emg.tasktracker.ui.addtask.AddTaskDialogFragment.OnTasksListAdded
 import dev.emg.tasktracker.ui.detailedtasklist.DetailedTasksListFragment
+import dev.emg.tasktracker.ui.goneView
 import dev.emg.tasktracker.ui.main.TasksListAdapter.OnTasksListListener
+import dev.emg.tasktracker.ui.showView
 import kotlinx.coroutines.flow.collect
 import timber.log.Timber
 import javax.inject.Inject
@@ -82,15 +85,35 @@ class MainFragment : Fragment(), OnTasksListListener {
 
     viewLifecycleOwner.lifecycleScope.launchWhenStarted {
       viewModel.tasksList.collect {
+
         when (it) {
           is ItemUiState.Success -> {
+            binding.lottieAnimation.apply {
+              this.pauseAnimation()
+              this.goneView()
+            }
+            binding.recyclerview.showView()
             tasksListAdapter.submitList(it.data)
           }
           is ItemUiState.Loading -> {
             Timber.d("Loading")
+            binding.recyclerview.goneView()
+            binding.lottieAnimation.apply {
+              this.showView()
+              this.setAnimation(R.raw.loading_anim)
+              this.repeatCount = LottieDrawable.INFINITE
+              this.playAnimation()
+            }
           }
           is ItemUiState.Error -> {
             Timber.e("Error -> ${it.exception}")
+            binding.recyclerview.goneView()
+            binding.lottieAnimation.apply {
+              this.showView()
+              this.setAnimation(R.raw.error_anim)
+              this.repeatCount = 0
+              this.playAnimation()
+            }
           }
         }
       }
