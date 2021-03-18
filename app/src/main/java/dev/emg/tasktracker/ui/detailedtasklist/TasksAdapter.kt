@@ -35,7 +35,11 @@ class TasksAdapter(
   }
 
   override fun getItem(position: Int): TaskItem {
-    return super.getItem(calculatePosition(position))
+    if (position < currentList.size) {
+      return super.getItem(position)
+    } else {
+      throw ArrayIndexOutOfBoundsException("Position exceeds the size of the list")
+    }
   }
 
   override fun getItemCount(): Int {
@@ -46,18 +50,12 @@ class TasksAdapter(
   }
 
   override fun getItemViewType(position: Int): Int {
-    val lastItemInList = currentList.size + 1
-    return when (position) {
-      0 -> VIEW_ADD_TASK
-      lastItemInList -> VIEW_ADD_TASK
+    val lastItemInList = currentList.size
+    return when {
+      currentList.isEmpty() -> VIEW_ADD_TASK
+      position == lastItemInList -> VIEW_ADD_TASK
       else -> VIEW_TASK
     }
-  }
-
-  private fun calculatePosition(position: Int): Int {
-    return if (position != 0) {
-      position - 1
-    } else 0
   }
 
   interface OnTaskListener {
