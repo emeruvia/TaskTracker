@@ -5,4 +5,5 @@
   <string name="enter_task_name">Enter task list name…</string>
   <string name="detail">Detail</string>
   <string name="save">Save</string>
+  <string name="undo">Undo</string>
 </resources>

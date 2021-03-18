@@ -10,7 +10,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import dev.emg.tasktracker.App
+import dev.emg.tasktracker.R
 import dev.emg.tasktracker.data.vo.ItemUiState
 import dev.emg.tasktracker.data.vo.TasksList
 import dev.emg.tasktracker.databinding.FragmentMainBinding
@@ -93,7 +95,6 @@ class MainFragment : Fragment(), OnTasksListListener {
         }
       }
     }
-
   }
 
   override fun onDestroy() {
@@ -121,6 +122,10 @@ class MainFragment : Fragment(), OnTasksListListener {
 
   override fun onTasksListDeleted(item: TasksList) {
     viewModel.deleteTasksList(item)
+
+    val snackBar = Snackbar.make(binding.root, R.string.undo, Snackbar.LENGTH_LONG)
+    snackBar.setAction(R.string.undo) { v -> viewModel.addTask(item) }
+    snackBar.show()
   }
 
   companion object {

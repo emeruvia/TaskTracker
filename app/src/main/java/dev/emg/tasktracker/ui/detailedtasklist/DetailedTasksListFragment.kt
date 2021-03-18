@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
+import com.google.android.material.snackbar.Snackbar
 import dev.emg.tasktracker.App
+import dev.emg.tasktracker.R
 import dev.emg.tasktracker.data.vo.ItemUiState
 import dev.emg.tasktracker.data.vo.TaskItem
 import dev.emg.tasktracker.data.vo.TasksList
@@ -95,6 +97,15 @@ class DetailedTasksListFragment : Fragment(), OnTaskListener {
 
   override fun onDeleteTask(item: TaskItem) {
     viewModel.deleteTaskItemFromTaskListById(tasksListId, item)
+
+    val snackBar = Snackbar.make(binding.root, R.string.undo, Snackbar.LENGTH_LONG)
+    snackBar.setAction(R.string.undo) { v ->
+      viewModel.addTaskItemToTaskListById(
+        tasksListId,
+        item
+      )
+    }
+    snackBar.show()
   }
 
   override fun onUpdateTask(item: TaskItem) {

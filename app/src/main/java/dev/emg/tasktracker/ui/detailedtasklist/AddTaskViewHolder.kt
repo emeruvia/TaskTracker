@@ -4,7 +4,6 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import dev.emg.tasktracker.data.vo.TaskItem
 import dev.emg.tasktracker.databinding.ItemTaskAddBinding
