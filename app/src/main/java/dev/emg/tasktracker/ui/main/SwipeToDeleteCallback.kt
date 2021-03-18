@@ -1,9 +1,7 @@
 package dev.emg.tasktracker.ui.main
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import androidx.core.content.ContextCompat
@@ -13,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import dev.emg.tasktracker.R
 
 class SwipeToDeleteCallback(
-  private val adapter: TasksAdapter,
-  private val context: Context
+  private val adapter: TasksListAdapter,
+  context: Context
 ) : ItemTouchHelper.SimpleCallback(ItemTouchHelper.LEFT, ItemTouchHelper.RIGHT) {
 
   private val accentColor = context.getColorStateList(R.color.color_state_list).defaultColor

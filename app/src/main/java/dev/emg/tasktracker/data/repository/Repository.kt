@@ -1,6 +1,7 @@
 package dev.emg.tasktracker.data.repository
 
 import dev.emg.tasktracker.data.db.Database
+import dev.emg.tasktracker.data.vo.TaskItem
 import dev.emg.tasktracker.data.vo.TasksList
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
@@ -18,5 +19,9 @@ interface Repository {
   suspend fun deleteTasksListInDbAndFetch(item: TasksList): List<TasksList>
 
   suspend fun updateTasksListItemInDbAndFetch(item: TasksList): List<TasksList>
+
+  suspend fun getTasksListById(id: Long): TasksList
+
+  suspend fun addTaskItemToTaskListById(id: Long, item: TaskItem): TasksList
 
 }

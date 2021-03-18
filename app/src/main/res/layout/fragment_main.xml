@@ -12,7 +12,7 @@
       android:id="@+id/recyclerview"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      tools:listitem="@layout/item_tasks"
+      tools:listitem="@layout/item_tasks_list"
       />
 
   <com.google.android.material.floatingactionbutton.FloatingActionButton

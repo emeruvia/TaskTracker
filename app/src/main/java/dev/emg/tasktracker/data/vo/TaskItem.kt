@@ -11,6 +11,6 @@ data class TaskItem(
   @PrimaryKey(autoGenerate = true)
   val id: Long = 0L,
   var name: String,
-  var wasCompleted: Boolean,
-  val position: Int
+  var wasCompleted: Boolean = false,
+  val position: Int = 0
 ) : Parcelable

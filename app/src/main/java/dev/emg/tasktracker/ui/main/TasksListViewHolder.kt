@@ -1,16 +1,15 @@
 package dev.emg.tasktracker.ui.main
 
-import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import dev.emg.tasktracker.data.vo.TasksList
-import dev.emg.tasktracker.databinding.ItemTasksBinding
+import dev.emg.tasktracker.databinding.ItemTasksListBinding
 import dev.emg.tasktracker.ui.goneView
-import dev.emg.tasktracker.ui.main.TasksAdapter.OnTasksListListener
+import dev.emg.tasktracker.ui.main.TasksListAdapter.OnTasksListListener
 import dev.emg.tasktracker.ui.showView
 
-class TasksViewHolder(private val binding: ItemTasksBinding) : ViewHolder(binding.root) {
+class TasksListViewHolder(private val binding: ItemTasksListBinding) : ViewHolder(binding.root) {
 
   fun bind(tasksList: TasksList, listener: OnTasksListListener) {
     binding.nameTv.text = tasksList.name
@@ -45,10 +44,10 @@ class TasksViewHolder(private val binding: ItemTasksBinding) : ViewHolder(bindin
   }
 
   companion object {
-    fun from(parent: ViewGroup): TasksViewHolder {
+    fun from(parent: ViewGroup): TasksListViewHolder {
       val layoutInflater = LayoutInflater.from(parent.context)
-      val binding = ItemTasksBinding.inflate(layoutInflater)
-      return TasksViewHolder(binding)
+      val binding = ItemTasksListBinding.inflate(layoutInflater)
+      return TasksListViewHolder(binding)
     }
   }
 }

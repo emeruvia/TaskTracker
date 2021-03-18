@@ -22,4 +22,8 @@ class FakeRepository @Inject constructor() : Repository {
   override suspend fun deleteTasksListInDbAndFetch(item: TasksList): List<TasksList> {
     TODO("Not yet implemented")
   }
+
+  override suspend fun getTasksListById(id: Long): TasksList {
+    TODO("Not yet implemented")
+  }
 }
