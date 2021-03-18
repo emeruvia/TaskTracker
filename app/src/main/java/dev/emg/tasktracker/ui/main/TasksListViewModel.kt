@@ -38,7 +38,6 @@ class TasksListViewModel @Inject constructor(private val repository: Repository)
     viewModelScope.launch(Dispatchers.IO) {
       _tasksList.value = ItemUiState.Loading
       try {
-        throw Exception("error")
         _tasksList.value =
           ItemUiState.Success(repository.insertTasksListInDbAndFetchThem(item))
       } catch (e: Exception) {
