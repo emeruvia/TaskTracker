@@ -7,17 +7,17 @@ import dev.emg.tasktracker.data.vo.TasksList
 
 class TasksListAdapter(
   private val listener: OnTasksListListener
-) : ListAdapter<TasksList, TasksListViewHolder>(DIFF_UTIL) {
+) : ListAdapter<TasksList, NestedTaskViewHolder>(DIFF_UTIL) {
 
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TasksListViewHolder {
-    return TasksListViewHolder.from(parent)
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NestedTaskViewHolder {
+    return NestedTaskViewHolder.from(parent)
   }
 
-  override fun onBindViewHolder(holder: TasksListViewHolder, position: Int) {
-    holder.bind(getItem(position), listener)
+  override fun onBindViewHolder(holder: NestedTaskViewHolder, position: Int) {
+    holder.bind(getItem(position))
   }
 
-  override fun onViewRecycled(holder: TasksListViewHolder) {
+  override fun onViewRecycled(holder: NestedTaskViewHolder) {
     super.onViewRecycled(holder)
     holder.unbind()
   }

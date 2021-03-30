@@ -126,21 +126,21 @@ class MainFragment : Fragment(), OnTasksListListener {
   }
 
   override fun onTasksListWasClicked(item: TasksList) {
-    val transaction = requireActivity().supportFragmentManager.beginTransaction()
-    transaction.addToBackStack(TAG)
-    transaction.replace(
-      binding.root.id,
-      DetailedTasksListFragment.create(item.id),
-      DetailedTasksListFragment.TAG
-    )
-    transaction.commit()
+//    val transaction = requireActivity().supportFragmentManager.beginTransaction()
+//    transaction.addToBackStack(TAG)
+//    transaction.replace(
+//      binding.root.id,
+//      DetailedTasksListFragment.create(item.id),
+//      DetailedTasksListFragment.TAG
+//    )
+//    transaction.commit()
   }
 
   override fun onTasksListWasCompleted(item: TasksList) {
-    viewModel.updateTasksList(item)
-    binding.recyclerview.post {
-      tasksListAdapter.notifyDataSetChanged()
-    }
+//    viewModel.updateTasksList(item)
+//    binding.recyclerview.post {
+//      tasksListAdapter.notifyDataSetChanged()
+//    }
   }
 
   override fun onTasksListDeleted(item: TasksList) {
