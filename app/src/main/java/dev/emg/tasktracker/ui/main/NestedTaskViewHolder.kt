@@ -13,23 +13,12 @@ import dev.emg.tasktracker.ui.detailedtasklist.TasksAdapter.OnTaskListener
 
 class NestedTaskViewHolder(
   private val binding: FragmentDetailedTasksListBinding
-) : ViewHolder(binding.root), OnTaskListener {
+) : ViewHolder(binding.root) {
 
-  override fun onAddTask(item: TaskItem) {
 
-  }
-
-  override fun onDeleteTask(item: TaskItem) {
-
-  }
-
-  override fun onUpdateTask(item: TaskItem) {
-
-  }
-
-  fun bind(task: TasksList) {
+  fun bind(task: TasksList, listener: OnTaskListener) {
     binding.taskTitle.text = task.name
-    val taskAdapter = TasksAdapter(this)
+    val taskAdapter = TasksAdapter(task.id, listener)
     binding.recyclerview.apply {
       val itemTouchHelper = ItemTouchHelper(
         SwipeToDeleteCallback(

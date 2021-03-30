@@ -15,6 +15,7 @@ import com.google.android.material.snackbar.Snackbar
 import dev.emg.tasktracker.App
 import dev.emg.tasktracker.R
 import dev.emg.tasktracker.data.vo.ItemUiState
+import dev.emg.tasktracker.data.vo.TaskItem
 import dev.emg.tasktracker.data.vo.TasksList
 import dev.emg.tasktracker.databinding.FragmentMainBinding
 import dev.emg.tasktracker.ui.SwipeToDeleteCallback
@@ -22,6 +23,7 @@ import dev.emg.tasktracker.ui.TasksListViewModel
 import dev.emg.tasktracker.ui.addtask.AddTaskDialogFragment
 import dev.emg.tasktracker.ui.addtask.AddTaskDialogFragment.OnTasksListAdded
 import dev.emg.tasktracker.ui.detailedtasklist.DetailedTasksListFragment
+import dev.emg.tasktracker.ui.detailedtasklist.TasksAdapter.OnTaskListener
 import dev.emg.tasktracker.ui.goneView
 import dev.emg.tasktracker.ui.main.TasksListAdapter.OnTasksListListener
 import dev.emg.tasktracker.ui.showView
@@ -29,7 +31,7 @@ import kotlinx.coroutines.flow.collect
 import timber.log.Timber
 import javax.inject.Inject
 
-class MainFragment : Fragment(), OnTasksListListener {
+class MainFragment : Fragment(), OnTaskListener {
 
   private var _binding: FragmentMainBinding? = null
   private val binding: FragmentMainBinding get() = _binding!!
@@ -57,18 +59,18 @@ class MainFragment : Fragment(), OnTasksListListener {
     tasksListAdapter = TasksListAdapter(this)
     val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
     val itemDecorator = DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL)
-    val itemTouchHelper = ItemTouchHelper(
-      SwipeToDeleteCallback(
-        context = requireContext(),
-        tasksListAdapter = tasksListAdapter
-      )
-    )
+//    val itemTouchHelper = ItemTouchHelper(
+//      SwipeToDeleteCallback(
+//        context = requireContext(),
+//        tasksListAdapter = tasksListAdapter
+//      )
+//    )
 
     binding.recyclerview.apply {
       this.adapter = tasksListAdapter
       this.layoutManager = layoutManager
       this.addItemDecoration(itemDecorator)
-      itemTouchHelper.attachToRecyclerView(this)
+//      itemTouchHelper.attachToRecyclerView(this)
     }
 
     binding.addTaskFab.setOnClickListener {
@@ -125,31 +127,43 @@ class MainFragment : Fragment(), OnTasksListListener {
     _binding = null
   }
 
-  override fun onTasksListWasClicked(item: TasksList) {
-//    val transaction = requireActivity().supportFragmentManager.beginTransaction()
-//    transaction.addToBackStack(TAG)
-//    transaction.replace(
-//      binding.root.id,
-//      DetailedTasksListFragment.create(item.id),
-//      DetailedTasksListFragment.TAG
-//    )
-//    transaction.commit()
+  override fun onAddTask(id: Long, item: TaskItem) {
+    viewModel.addTaskItem(id, item)
   }
 
-  override fun onTasksListWasCompleted(item: TasksList) {
-//    viewModel.updateTasksList(item)
-//    binding.recyclerview.post {
-//      tasksListAdapter.notifyDataSetChanged()
-//    }
+  override fun onDeleteTask(id: Long, item: TaskItem) {
+    viewModel.deleteTaskItemFromTaskListById(id, item)
   }
 
-  override fun onTasksListDeleted(item: TasksList) {
-    viewModel.deleteTasksList(item)
+  override fun onUpdateTask(item: TaskItem) {
 
-    val snackBar = Snackbar.make(binding.root, R.string.undo, Snackbar.LENGTH_LONG)
-    snackBar.setAction(R.string.undo) { v -> viewModel.addTask(item) }
-    snackBar.show()
   }
+
+  //  override fun onTasksListWasClicked(item: TasksList) {
+////    val transaction = requireActivity().supportFragmentManager.beginTransaction()
+////    transaction.addToBackStack(TAG)
+////    transaction.replace(
+////      binding.root.id,
+////      DetailedTasksListFragment.create(item.id),
+////      DetailedTasksListFragment.TAG
+////    )
+////    transaction.commit()
+//  }
+//
+//  override fun onTasksListWasCompleted(item: TasksList) {
+////    viewModel.updateTasksList(item)
+////    binding.recyclerview.post {
+////      tasksListAdapter.notifyDataSetChanged()
+////    }
+//  }
+//
+//  override fun onTasksListDeleted(item: TasksList) {
+//    viewModel.deleteTasksList(item)
+//
+//    val snackBar = Snackbar.make(binding.root, R.string.undo, Snackbar.LENGTH_LONG)
+//    snackBar.setAction(R.string.undo) { v -> viewModel.addTask(item) }
+//    snackBar.show()
+//  }
 
   companion object {
     const val TAG = "mainFragment"

@@ -32,25 +32,25 @@ class TasksViewModel @Inject constructor(private val repository: Repository) : V
     }
   }
 
-  fun addTaskItemToTaskListById(id: Long?, item: TaskItem) {
-    viewModelScope.launch {
-      _taskList.value = ItemUiState.Loading
-      try {
-        id?.let {
-          _taskList.value = ItemUiState.Success(repository.addTaskItemToTaskListById(id, item))
-        } ?: throw NullPointerException("TasksList id can't be null")
-      } catch (e: Exception) {
-        _taskList.value = ItemUiState.Error(e)
-      }
-    }
-  }
+//  fun addTaskItemToTaskListById(id: Long?, item: TaskItem) {
+//    viewModelScope.launch {
+//      _taskList.value = ItemUiState.Loading
+//      try {
+//        id?.let {
+//          _taskList.value = ItemUiState.Success(repository.addTaskItemToTaskListById(id, item))
+//        } ?: throw NullPointerException("TasksList id can't be null")
+//      } catch (e: Exception) {
+//        _taskList.value = ItemUiState.Error(e)
+//      }
+//    }
+//  }
 
   fun deleteTaskItemFromTaskListById(id: Long?, item: TaskItem) {
     viewModelScope.launch {
       _taskList.value = ItemUiState.Loading
       try {
         id?.let {
-          _taskList.value = ItemUiState.Success(repository.deleteTaskItemFromTaskListById(id, item))
+//          _taskList.value = ItemUiState.Success(repository.deleteTaskItemFromTaskListById(id, item))
         } ?: throw NullPointerException("TasksList id can't be null")
       } catch (e: Exception) {
         _taskList.value = ItemUiState.Error(e)

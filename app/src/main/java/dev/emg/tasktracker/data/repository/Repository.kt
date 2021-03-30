@@ -22,8 +22,8 @@ interface Repository {
 
   suspend fun getTasksListById(id: Long): TasksList
 
-  suspend fun addTaskItemToTaskListById(id: Long, item: TaskItem): TasksList
+  suspend fun addTaskItemToTaskListById(id: Long, item: TaskItem): List<TasksList>
 
-  suspend fun deleteTaskItemFromTaskListById(id: Long, item: TaskItem): TasksList
+  suspend fun deleteTaskItemFromTaskListById(id: Long, item: TaskItem): List<TasksList>
 
 }

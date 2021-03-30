@@ -36,24 +36,24 @@ class TasksRepository @Inject constructor(private val database: Database) : Repo
     return database.tasksListDao().getTaskListById(id)
   }
 
-  override suspend fun addTaskItemToTaskListById(id: Long, item: TaskItem): TasksList {
+  override suspend fun addTaskItemToTaskListById(id: Long, item: TaskItem): List<TasksList> {
     val tasksList = getTasksListById(id)
     val updatedTasks = mutableListOf<TaskItem>()
     updatedTasks.addAll(tasksList.tasksList)
     updatedTasks.add(item)
     tasksList.tasksList = updatedTasks
     updateTasksList(tasksList)
-    return getTasksListById(id)
+    return getAllTasks()
   }
 
-  override suspend fun deleteTaskItemFromTaskListById(id: Long, item: TaskItem): TasksList {
+  override suspend fun deleteTaskItemFromTaskListById(id: Long, item: TaskItem): List<TasksList> {
     val tasksList = getTasksListById(id)
     val updatedTasks = mutableListOf<TaskItem>()
     updatedTasks.addAll(tasksList.tasksList)
     updatedTasks.remove(item)
     tasksList.tasksList = updatedTasks
     updateTasksList(tasksList)
-    return getTasksListById(id)
+    return getAllTasks()
   }
 
   private suspend fun addTasksListItem(item: TasksList) {

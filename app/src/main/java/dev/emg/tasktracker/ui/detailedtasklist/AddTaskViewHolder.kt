@@ -26,7 +26,7 @@ class AddTaskViewHolder(private val binding: ItemTaskAddBinding) : ViewHolder(bi
         if (keyEvent == null || !keyEvent.isShiftPressed) {
 
           val newTask = TaskItem(name = binding.taskName.text.toString())
-          listener.onAddTask(newTask)
+//          listener.onAddTask(newTask)
 
           binding.taskName.apply {
             this.text.clear()

@@ -20,7 +20,7 @@ import dev.emg.tasktracker.ui.detailedtasklist.TasksAdapter.OnTaskListener
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
-class DetailedTasksListFragment : Fragment(), OnTaskListener {
+class DetailedTasksListFragment : Fragment() {
 
   private var _binding: FragmentDetailedTasksListBinding? = null
   private val binding: FragmentDetailedTasksListBinding get() = _binding!!
@@ -49,68 +49,48 @@ class DetailedTasksListFragment : Fragment(), OnTaskListener {
     return binding.root
   }
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    viewModel.getTasksListById(tasksListId)
+//  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//    super.onViewCreated(view, savedInstanceState)
+//    viewModel.getTasksListById(tasksListId)
+//
+//    taskAdapter = TasksAdapter(0, this)
+//
+//    binding.recyclerview.apply {
+//      val itemTouchHelper = ItemTouchHelper(
+//        SwipeToDeleteCallback(
+//          context = requireContext(),
+//          taskAdapter = taskAdapter
+//        )
+//      )
+//
+//      this.adapter = taskAdapter
+//      itemTouchHelper.attachToRecyclerView(this)
+//    }
+//
+//    viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+//      viewModel.taskList.collect {
+//        when (it) {
+//          is ItemUiState.Success -> {
+//            binding.taskTitle.text = it.data.name
+//            taskAdapter.submitList(it.data.tasksList)
+//            binding.recyclerview.post {
+//              if (!binding.recyclerview.isComputingLayout) {
+//                taskAdapter.notifyDataSetChanged()
+//              }
+//            }
+//
+//          }
+//          is ItemUiState.Loading -> {
+//            // TODO Add loading state
+//          }
+//          is ItemUiState.Error -> {
+//            // TODO Add error state
+//          }
+//        }
+//      }
+//    }
+//  }
 
-    taskAdapter = TasksAdapter(this)
-
-    binding.recyclerview.apply {
-      val itemTouchHelper = ItemTouchHelper(
-        SwipeToDeleteCallback(
-          context = requireContext(),
-          taskAdapter = taskAdapter
-        )
-      )
-
-      this.adapter = taskAdapter
-      itemTouchHelper.attachToRecyclerView(this)
-    }
-
-    viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-      viewModel.taskList.collect {
-        when (it) {
-          is ItemUiState.Success -> {
-            binding.taskTitle.text = it.data.name
-            taskAdapter.submitList(it.data.tasksList)
-            binding.recyclerview.post {
-              if (!binding.recyclerview.isComputingLayout) {
-                taskAdapter.notifyDataSetChanged()
-              }
-            }
-
-          }
-          is ItemUiState.Loading -> {
-            // TODO Add loading state
-          }
-          is ItemUiState.Error -> {
-            // TODO Add error state
-          }
-        }
-      }
-    }
-  }
-
-  override fun onAddTask(item: TaskItem) {
-    viewModel.addTaskItemToTaskListById(tasksListId, item)
-  }
-
-  override fun onDeleteTask(item: TaskItem) {
-    viewModel.deleteTaskItemFromTaskListById(tasksListId, item)
-
-    val snackBar = Snackbar.make(binding.root, R.string.undo, Snackbar.LENGTH_LONG)
-    snackBar.setAction(R.string.undo) { v ->
-      viewModel.addTaskItemToTaskListById(
-        tasksListId,
-        item
-      )
-    }
-    snackBar.show()
-  }
-
-  override fun onUpdateTask(item: TaskItem) {
-
-  }
 
   companion object {
     private const val ARGS_TASKSLIST = "args_task_lists_detailed"

@@ -8,6 +8,7 @@ import dev.emg.tasktracker.data.vo.TaskItem
 import java.lang.Exception
 
 class TasksAdapter(
+  private val id: Long,
   private val listener: OnTaskListener
 ) : ListAdapter<TaskItem, ViewHolder>(DIFF_UTIL) {
 
@@ -59,12 +60,12 @@ class TasksAdapter(
   }
 
   fun deleteItemAtPosition(position: Int) {
-    listener.onDeleteTask(getItem(position))
+    listener.onDeleteTask(id, getItem(position))
   }
 
   interface OnTaskListener {
-    fun onAddTask(item: TaskItem)
-    fun onDeleteTask(item: TaskItem)
+    fun onAddTask(id: Long, item: TaskItem)
+    fun onDeleteTask(id: Long, item: TaskItem)
     fun onUpdateTask(item: TaskItem)
   }
 

@@ -4,9 +4,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import dev.emg.tasktracker.data.vo.TasksList
+import dev.emg.tasktracker.ui.detailedtasklist.TasksAdapter.OnTaskListener
 
 class TasksListAdapter(
-  private val listener: OnTasksListListener
+  private val listener: OnTaskListener
 ) : ListAdapter<TasksList, NestedTaskViewHolder>(DIFF_UTIL) {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NestedTaskViewHolder {
@@ -14,7 +15,7 @@ class TasksListAdapter(
   }
 
   override fun onBindViewHolder(holder: NestedTaskViewHolder, position: Int) {
-    holder.bind(getItem(position))
+    holder.bind(getItem(position), listener)
   }
 
   override fun onViewRecycled(holder: NestedTaskViewHolder) {
@@ -22,10 +23,10 @@ class TasksListAdapter(
     holder.unbind()
   }
 
-  fun deleteItemAtPosition(position: Int) {
-    val tasksListItem = getItem(position)
-    listener.onTasksListDeleted(tasksListItem)
-  }
+//  fun deleteItemAtPosition(position: Int) {
+//    val tasksListItem = getItem(position)
+//    listener.onTasksListDeleted(tasksListItem)
+//  }
 
   interface OnTasksListListener {
     fun onTasksListWasClicked(item: TasksList)

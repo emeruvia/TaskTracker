@@ -14,7 +14,7 @@ import dev.emg.tasktracker.ui.main.TasksListAdapter
 
 class SwipeToDeleteCallback(
   context: Context,
-  private val tasksListAdapter: TasksListAdapter? = null,
+//  private val tasksListAdapter: TasksListAdapter? = null,
   private val taskAdapter: TasksAdapter? = null
 ) : ItemTouchHelper.SimpleCallback(ItemTouchHelper.LEFT, ItemTouchHelper.LEFT) {
 
@@ -33,7 +33,7 @@ class SwipeToDeleteCallback(
 
   override fun onSwiped(viewHolder: ViewHolder, direction: Int) {
     val position = viewHolder.adapterPosition
-    tasksListAdapter?.deleteItemAtPosition(position)
+//    tasksListAdapter?.deleteItemAtPosition(position)
     taskAdapter?.deleteItemAtPosition(position)
   }
 
